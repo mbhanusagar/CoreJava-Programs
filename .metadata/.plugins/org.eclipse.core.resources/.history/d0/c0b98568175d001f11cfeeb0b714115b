@@ -1,0 +1,5 @@
+package com.evergent.src.basicapplications.BankManagementSystem;
+
+public class BankAccountDetails {
+
+}

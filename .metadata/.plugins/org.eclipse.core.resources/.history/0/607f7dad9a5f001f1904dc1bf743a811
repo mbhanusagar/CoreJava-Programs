@@ -1,0 +1,187 @@
+package com.evergent.src.basicapplications.AlcoholManagementSystemBhanu2.copy;
+
+
+import java.util.Scanner;
+class AlcoholOrderingSystem {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String module;
+        int quantity = 0;
+        double amount = 0.0;
+        double discount = 0.0;
+        StringBuilder currentOrderSummary = new StringBuilder();
+        StringBuilder fullOrderSummary = new StringBuilder();
+
+        // Instantiate report and exit objects
+        ReportGeneration reportGenerator = new OrderReport();
+        ExitSystem systemExit = new SystemExit();
+
+        while (true) {
+            System.out.println("Select an option:");
+            System.out.println("1 - Order Alcohol");
+            System.out.println("P - Make Payment");
+            System.out.println("R - Generate Report");
+            System.out.println("E - Exit");
+            System.out.print("Enter your choice: ");
+            module = scanner.nextLine().toUpperCase();
+
+            switch (module) {
+                case "1": // Order Alcohol
+                    System.out.println("\nSelect Alcohol Type");
+                    System.out.println("=====================");
+                    System.out.println("1 - Beer");
+                    System.out.println("2 - Wine");
+                    System.out.println("3 - Liquor");
+                    System.out.println("=====================");
+                    System.out.print("Enter your choice (1, 2, 3): ");
+
+                    int alcoholChoice = Integer.parseInt(scanner.nextLine());
+
+                    switch (alcoholChoice) {
+                        case 1: // Beer
+                            System.out.println("\nSelect Beer Brand");
+                            System.out.println("=====================");
+                            System.out.println("1 - Kingfisher");
+                            System.out.println("2 - Carlsberg");
+                            System.out.println("3 - Budweiser");
+                            System.out.println("=====================");
+                            System.out.print("Enter your choice (1, 2, 3): ");
+
+                            int beerChoice = Integer.parseInt(scanner.nextLine());
+                            Beer selectedBeer = null;
+                            switch (beerChoice) {
+                                case 1:
+                                    selectedBeer = BeerBrand.KINGFISHER.getBeer();
+                                    break;
+                                case 2:
+                                    selectedBeer = BeerBrand.CARLSBERG.getBeer();
+                                    break;
+                                case 3:
+                                    selectedBeer = BeerBrand.BUDWAISER.getBeer();
+                                    break;
+                                default:
+                                    System.out.println("Invalid choice.");
+                                    break;
+                            }
+
+                            if (selectedBeer != null) {
+                                System.out.print("Enter quantity: ");
+                                quantity = Integer.parseInt(scanner.nextLine());
+                                amount = selectedBeer.getPrice() * quantity;
+                                currentOrderSummary.append(selectedBeer.getType()).append(": ").append(quantity)
+                                        .append(" x ").append(selectedBeer.getPrice()).append(" = ").append(amount).append("\n");
+                                fullOrderSummary.append(currentOrderSummary); // Append current order to full summary
+                                currentOrderSummary.setLength(0); // Clear current order summary for next order
+                            }
+                            break;
+                        case 2: // Wine
+                            System.out.println("\nSelect Wine Type");
+                            System.out.println("=====================");
+                            System.out.println("1 - Red Wine");
+                            System.out.println("2 - White Wine");
+                            System.out.println("=====================");
+                            System.out.print("Enter your choice (1, 2): ");
+
+                            int wineChoice = Integer.parseInt(scanner.nextLine());
+                            Wine selectedWine = null;
+                            switch (wineChoice) {
+                                case 1:
+                                    selectedWine = WineType.RED.getWine();
+                                    break;
+                                case 2:
+                                    selectedWine = WineType.WHITE.getWine();
+                                    break;
+                                default:
+                                    System.out.println("Invalid choice.");
+                                    break;
+                            }
+
+                            if (selectedWine != null) {
+                                System.out.print("Enter quantity (bottles): ");
+                                quantity = Integer.parseInt(scanner.nextLine());
+                                amount = selectedWine.getPrice() * quantity;
+                                currentOrderSummary.append(selectedWine.getType()).append(": ").append(quantity)
+                                        .append(" x ").append(selectedWine.getPrice()).append(" = ").append(amount).append("\n");
+                                fullOrderSummary.append(currentOrderSummary); // Append current order to full summary
+                                currentOrderSummary.setLength(0); // Clear current order summary for next order
+                            }
+                            break;
+                        case 3: // Liquor
+                            System.out.println("\nSelect Liquor Type");
+                            System.out.println("=====================");
+                            System.out.println("1 - Whisky");
+                            System.out.println("2 - Vodka");
+                            System.out.println("3 - Rum");
+                            System.out.println("=====================");
+                            System.out.print("Enter your choice (1, 2, 3): ");
+
+                            int liquorChoice = Integer.parseInt(scanner.nextLine());
+                            Liquor selectedLiquor = null;
+                            switch (liquorChoice) {
+                                case 1:
+                                    selectedLiquor = LiquorType.WHISKY.getLiquor();
+                                    break;
+                                case 2:
+                                    selectedLiquor = LiquorType.VODKA.getLiquor();
+                                    break;
+                                case 3:
+                                    selectedLiquor = LiquorType.RUM.getLiquor();
+                                    break;
+                                default:
+                                    System.out.println("Invalid choice.");
+                                    break;
+                            }
+
+                            if (selectedLiquor != null) {
+                                System.out.print("Enter quantity (bottles): ");
+                                quantity = Integer.parseInt(scanner.nextLine());
+                                amount = selectedLiquor.getPrice() * quantity;
+                                currentOrderSummary.append(selectedLiquor.getType()).append(": ").append(quantity)
+                                        .append(" x ").append(selectedLiquor.getPrice()).append(" = ").append(amount).append("\n");
+                                fullOrderSummary.append(currentOrderSummary); // Append current order to full summary
+                                currentOrderSummary.setLength(0); // Clear current order summary for next order
+                            }
+                            break;
+                        default:
+                            System.out.println("Invalid choice. Please enter 1, 2, or 3.");
+                            break;
+                    }
+                    break;
+
+                case "P": // Make Payment
+                    if (fullOrderSummary.length() == 0) {
+                        System.out.println("No orders to process. Please place an order first.");
+                        break;
+                    }
+                    System.out.println("\nMake Payment");
+                    System.out.println("=====================");
+                    System.out.println("1 - Cash");
+                    System.out.println("2 - Card");
+                    System.out.println("=====================");
+                    System.out.print("Enter your choice (1, 2): ");
+                    int paymentChoice = Integer.parseInt(scanner.nextLine());
+                    PaymentMethod paymentMethod = new PaymentMethodImpl(paymentChoice == 1 ? "Cash" : "Card");
+                    amount = paymentMethod.applyDiscount(amount, quantity);
+                    System.out.println("Amount after discount: " + amount);
+                    break;
+
+                case "R": // Generate Report
+                    if (fullOrderSummary.length() == 0) {
+                        System.out.println("No orders to report. Please place an order first.");
+                        break;
+                    }
+                    reportGenerator.generateReport(fullOrderSummary.toString(), amount);
+                    fullOrderSummary.setLength(0); // Clear the full order summary after reporting
+                    break;
+
+                case "E": // Exit System
+                    systemExit.exit();
+                    return; // Exit the program
+
+                default:
+                    System.out.println("Invalid choice. Please enter 1, P, R, or E.");
+                    break;
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+package com.evergent.CoreJava.ExceptionHandling;
+
+import java.security.PublicKey;
+
+public class StackOverFlowExample {
+	public static Void recursiveMethod() {
+		recursiveMethod();
+	}
+public static void main(String[] args) {
+	try {
+		recursiveMethod();
+	} catch (StackOverflowError e) {
+		// TODO: handle exception
+		System.out.println("StackOverFlowError caught "+e.getMessage());
+	}}
+	
+}

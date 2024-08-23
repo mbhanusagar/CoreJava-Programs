@@ -1,0 +1,9 @@
+package com.evergent.CoreJava.ExceptionHandling;
+
+public class MyOutOfMeoryDemo17 {
+	public static void main(String[] args) {
+		int arr[]= new int[10**1000];
+		
+			System.out.println(arr);
+		}
+}

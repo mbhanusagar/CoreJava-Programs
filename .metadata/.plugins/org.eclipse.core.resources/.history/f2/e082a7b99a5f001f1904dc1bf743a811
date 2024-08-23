@@ -1,0 +1,7 @@
+package com.evergent.src.basicapplications.AlcoholManagementSystemBhanu2.copy;
+
+public interface PaymentMethod {
+    String getMethod();
+    double applyDiscount(double amount, int quantity);
+}
+

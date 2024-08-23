@@ -1,0 +1,16 @@
+package com.evergent.src.basicapplications.AlcoholManagementSystemBhanu2.copy;
+
+
+
+public class OrderReport implements ReportGeneration {
+    @Override
+    public void generateReport(String orderSummary, double totalAmount) {
+        System.out.println("\nOrder Summary Report");
+        System.out.println("=====================");
+        System.out.println(orderSummary);
+        System.out.println("Total Amount: " + totalAmount);
+        System.out.println("=====================");
+    }
+}
+
+
